@@ -1,10 +1,10 @@
-package com.debuggeandoideas.airdnd.Services;
+package com.kosmostecnologia.airdnd.Services;
 
-import com.debuggeandoideas.airdnd.dto.BookingDto;
-import com.debuggeandoideas.airdnd.dto.RoomDto;
-import com.debuggeandoideas.airdnd.helpers.MailHelper;
-import com.debuggeandoideas.airdnd.repositories.BookingRepository;
-import com.debuggeandoideas.airdnd.utils.CurrencyConverter;
+import com.kosmostecnologia.airdnd.dto.BookingDto;
+import com.kosmostecnologia.airdnd.dto.RoomDto;
+import com.kosmostecnologia.airdnd.helpers.MailHelper;
+import com.kosmostecnologia.airdnd.repositories.BookingRepository;
+import com.kosmostecnologia.airdnd.utils.CurrencyConverter;
 
 import java.time.temporal.ChronoUnit;
 

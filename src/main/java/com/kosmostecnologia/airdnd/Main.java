@@ -1,13 +1,13 @@
-package com.debuggeandoideas.airdnd;
+package com.kosmostecnologia.airdnd;
 
-import com.debuggeandoideas.airdnd.Services.BookingService;
-import com.debuggeandoideas.airdnd.Services.PaymentService;
-import com.debuggeandoideas.airdnd.Services.RoomService;
-import com.debuggeandoideas.airdnd.dto.BookingDto;
-import com.debuggeandoideas.airdnd.helpers.MailHelper;
-import com.debuggeandoideas.airdnd.repositories.BookingRepository;
-import com.debuggeandoideas.airdnd.repositories.PaymentRepository;
-import com.debuggeandoideas.airdnd.repositories.RoomRepository;
+import com.kosmostecnologia.airdnd.Services.BookingService;
+import com.kosmostecnologia.airdnd.Services.PaymentService;
+import com.kosmostecnologia.airdnd.Services.RoomService;
+import com.kosmostecnologia.airdnd.dto.BookingDto;
+import com.kosmostecnologia.airdnd.helpers.MailHelper;
+import com.kosmostecnologia.airdnd.repositories.BookingRepository;
+import com.kosmostecnologia.airdnd.repositories.PaymentRepository;
+import com.kosmostecnologia.airdnd.repositories.RoomRepository;
 
 import java.time.LocalDate;
 import java.util.UUID;

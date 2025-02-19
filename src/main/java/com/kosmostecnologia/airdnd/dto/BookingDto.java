@@ -1,4 +1,4 @@
-package com.debuggeandoideas.airdnd.dto;
+package com.kosmostecnologia.airdnd.dto;
 
 import java.time.LocalDate;
 import java.util.Objects;

@@ -1,4 +1,4 @@
-package com.debuggeandoideas.airdnd.utils;
+package com.kosmostecnologia.airdnd.utils;
 
 public class CurrencyConverter {
 

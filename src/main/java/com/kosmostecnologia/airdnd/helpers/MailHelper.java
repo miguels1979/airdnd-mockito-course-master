@@ -1,4 +1,4 @@
-package com.debuggeandoideas.airdnd.helpers;
+package com.kosmostecnologia.airdnd.helpers;
 
 import java.util.Objects;
 

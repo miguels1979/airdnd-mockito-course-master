@@ -1,4 +1,4 @@
-package com.debuggeandoideas.airdnd.repositories;
+package com.kosmostecnologia.airdnd.repositories;
 
 import java.util.HashMap;
 import java.util.Map;

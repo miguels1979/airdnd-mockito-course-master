@@ -1,9 +1,9 @@
-package com.debuggeandoideas.airdnd.Services;
+package com.kosmostecnologia.airdnd.Services;
 
-import com.debuggeandoideas.airdnd.dto.BookingDto;
-import com.debuggeandoideas.airdnd.dto.RoomDto;
-import com.debuggeandoideas.airdnd.exceptions.AirdndException;
-import com.debuggeandoideas.airdnd.repositories.RoomRepository;
+import com.kosmostecnologia.airdnd.dto.BookingDto;
+import com.kosmostecnologia.airdnd.dto.RoomDto;
+import com.kosmostecnologia.airdnd.exceptions.AirdndException;
+import com.kosmostecnologia.airdnd.repositories.RoomRepository;
 
 import java.util.List;
 import java.util.Map;

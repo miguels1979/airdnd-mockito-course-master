@@ -1,4 +1,4 @@
-package com.debuggeandoideas.airdnd.exceptions;
+package com.kosmostecnologia.airdnd.exceptions;
 
 public class AirdndException extends RuntimeException {
 

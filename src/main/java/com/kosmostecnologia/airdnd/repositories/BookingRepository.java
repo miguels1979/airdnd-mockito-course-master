@@ -1,6 +1,6 @@
-package com.debuggeandoideas.airdnd.repositories;
+package com.kosmostecnologia.airdnd.repositories;
 
-import com.debuggeandoideas.airdnd.dto.BookingDto;
+import com.kosmostecnologia.airdnd.dto.BookingDto;
 
 import java.util.HashMap;
 import java.util.Map;

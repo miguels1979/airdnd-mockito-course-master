@@ -1,7 +1,7 @@
-package com.debuggeandoideas.airdnd.Services;
+package com.kosmostecnologia.airdnd.Services;
 
-import com.debuggeandoideas.airdnd.dto.BookingDto;
-import com.debuggeandoideas.airdnd.repositories.PaymentRepository;
+import com.kosmostecnologia.airdnd.dto.BookingDto;
+import com.kosmostecnologia.airdnd.repositories.PaymentRepository;
 
 import java.util.UUID;
 
