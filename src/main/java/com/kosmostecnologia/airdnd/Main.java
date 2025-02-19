@@ -1,8 +1,8 @@
 package com.kosmostecnologia.airdnd;
 
-import com.kosmostecnologia.airdnd.Services.BookingService;
-import com.kosmostecnologia.airdnd.Services.PaymentService;
-import com.kosmostecnologia.airdnd.Services.RoomService;
+import com.kosmostecnologia.airdnd.services.BookingService;
+import com.kosmostecnologia.airdnd.services.PaymentService;
+import com.kosmostecnologia.airdnd.services.RoomService;
 import com.kosmostecnologia.airdnd.dto.BookingDto;
 import com.kosmostecnologia.airdnd.helpers.MailHelper;
 import com.kosmostecnologia.airdnd.repositories.BookingRepository;

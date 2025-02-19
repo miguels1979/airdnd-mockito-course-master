@@ -1,4 +1,4 @@
-package com.kosmostecnologia.airdnd.Services;
+package com.kosmostecnologia.airdnd.services;
 
 import com.kosmostecnologia.airdnd.dto.BookingDto;
 import com.kosmostecnologia.airdnd.repositories.PaymentRepository;
