@@ -9,12 +9,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.function.Executable;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Spy;
+import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,9 +31,10 @@ public class BookingServiceTest {
     private BookingRepository bookingRepositoryMock;
     @Mock
     private MailHelper mailHelperMock;
-
     @InjectMocks
     private BookingService bookingService;
+   @Captor
+    private ArgumentCaptor<String> stringCaptor;//Le agrega más granularidad a los test
 
     @Test
     @DisplayName("getAvailablePlaceCount should works")
@@ -124,6 +124,38 @@ public class BookingServiceTest {
 
         //Usamos el assertTrows()
         assertThrows(IllegalArgumentException.class,executable);
+
+    }
+
+    @Test
+    @DisplayName("unbook should works")
+    void unbook(){
+        String id1 = "id1";
+        String id2 = "id2";
+
+        BookingDto bookingRes1 = DataDummy.DEFAULT_BOOKING_REQ_1;
+        bookingRes1.setRoom(DataDummy.DEFAULT_ROOMS_LIST.get(3));
+
+        BookingDto bookingRes2 = DataDummy.DEFAULT_BOOKING_REQ_2;
+        bookingRes2.setRoom(DataDummy.DEFAULT_ROOMS_LIST.get(4));
+
+        when(this.bookingRepositoryMock.findById(anyString()))
+                .thenReturn(bookingRes1)
+                .thenReturn(bookingRes2);
+
+        doNothing().when(this.roomServiceMock).unbookRoom(anyString());
+        doNothing().when(this.bookingRepositoryMock).deleteById(anyString());
+
+        this.bookingService.unbook(id1);
+        this.bookingService.unbook(id2);
+
+        verify(this.roomServiceMock,times(2)).unbookRoom(anyString());
+        verify(this.bookingRepositoryMock,times(2)).deleteById(anyString());
+
+        //Le agrega mas granuralidad a los test y permite usar los asserEquals a un método void
+        verify(this.bookingRepositoryMock,times(2)).findById(this.stringCaptor.capture());
+
+        assertEquals(List.of(id1,id2),this.stringCaptor.getAllValues());
 
     }
 
