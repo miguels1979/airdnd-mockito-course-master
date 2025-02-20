@@ -61,12 +61,18 @@ public class BookingServiceTest {
 //        when(this.roomServiceMock.findAvailableRoom(any(BookingDto.class))).thenReturn(DataDummy.DEFAULT_ROOMS_LIST.get(0));
 //        when(this.bookingRepositoryMock.save(any(BookingDto.class))).thenReturn(expected);
 
+        //Mockear un método void y luego hacer un verify
+        doNothing().when(this.roomServiceMock).bookRoom(anyString());
+
         String actual = this.bookingService.booking(DataDummy.DEFAULT_BOOKING_REQ_2);
         assertEquals(expected,actual);
 
         //PARA VERIFICAR QUE UN MÉTODO SE HA LLAMADO CORRECTAMENTE, si no se llaman aparece un error.
         verify(this.roomServiceMock,times(1)).findAvailableRoom(any(BookingDto.class));
         verify(this.bookingRepositoryMock).save(any(BookingDto.class));
+
+        //SE VERIFICA EL MÉTODO MOCK VOID
+        verify(this.roomServiceMock,times(1)).bookRoom(anyString());
 
     }
 
