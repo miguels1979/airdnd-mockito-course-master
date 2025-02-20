@@ -47,13 +47,19 @@ public class BookingServiceTest {
     @DisplayName("booking should works")
     void booking(){
         final String expected = UUID.randomUUID().toString();
-        //Cuando se tiene que ser muy estricto con los parámetros se tiene que realizar lo siguiente
-//        when(this.roomServiceMock.findAvailableRoom(DataDummy.DEFAULT_BOOKING_REQ_2)).thenReturn(DataDummy.DEFAULT_ROOMS_LIST.get(0));
-//        when(this.bookingRepositoryMock.save(DataDummy.DEFAULT_BOOKING_REQ_2)).thenReturn(expected);
 
-        //Cuando no se tiene que ser muy estricto con los parametros se puede realizar lo siguiente
-        when(this.roomServiceMock.findAvailableRoom(any(BookingDto.class))).thenReturn(DataDummy.DEFAULT_ROOMS_LIST.get(0));
-        when(this.bookingRepositoryMock.save(any(BookingDto.class))).thenReturn(expected);
+        //when(this.roomServiceMock.findAvailableRoom(DataDummy.DEFAULT_BOOKING_REQ_2)).thenReturn(DataDummy.DEFAULT_ROOMS_LIST.get(0));
+
+        //NO SE LLAMA AL MÉTODO REAL
+        doReturn(DataDummy.DEFAULT_ROOMS_LIST.get(0)).when(this.roomServiceMock).findAvailableRoom(DataDummy.DEFAULT_BOOKING_REQ_2);
+
+        //SI SE LLAMA AL MÉTODO REAL, PODRÍA LANZAR UNA EXCEPCIÓN SI EL MÉTODO LA TIENE
+        //Cuando se tiene que SER MUY ESTRICTO con los parámetros se tiene que realizar lo siguiente
+        when(this.bookingRepositoryMock.save(DataDummy.DEFAULT_BOOKING_REQ_2)).thenReturn(expected);
+
+        //Cuando NO ES NECESARIO SER MUY ESTRICTO con los parámetros se puede realizar lo siguiente
+//        when(this.roomServiceMock.findAvailableRoom(any(BookingDto.class))).thenReturn(DataDummy.DEFAULT_ROOMS_LIST.get(0));
+//        when(this.bookingRepositoryMock.save(any(BookingDto.class))).thenReturn(expected);
 
         String actual = this.bookingService.booking(DataDummy.DEFAULT_BOOKING_REQ_2);
         assertEquals(expected,actual);
