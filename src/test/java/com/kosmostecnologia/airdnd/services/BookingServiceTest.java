@@ -178,6 +178,7 @@ public class BookingServiceTest {
             Double actual = this.bookingService.calculateInMxn(DataDummy.DEFAULT_BOOKING_REQ_1);
             assertEquals(expected,actual);
         }
+        //PRUEBA
 
     }
 
