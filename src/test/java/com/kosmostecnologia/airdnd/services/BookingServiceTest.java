@@ -81,7 +81,7 @@ public class BookingServiceTest {
     @Test
     @DisplayName("booking with exceptions")
     void bookingWithException(){
-        final String expected = UUID.randomUUID().toString();
+
         //when(this.roomServiceMock.findAvailableRoom(DataDummy.DEFAULT_BOOKING_REQ_2)).thenReturn(DataDummy.DEFAULT_ROOMS_LIST.get(0));
         //NO SE LLAMA AL MÉTODO REAL
         doReturn(DataDummy.DEFAULT_ROOMS_LIST.get(0)).when(this.roomServiceMock).findAvailableRoom(DataDummy.DEFAULT_BOOKING_REQ_4);
@@ -89,8 +89,11 @@ public class BookingServiceTest {
         //MOCK CON EXCEPCIONES ,MODO 1 - TOTALMENTE MOCK
         //doThrow(new IllegalArgumentException("Max 3 guest")).when(this.paymentServiceMock).pay(any(BookingDto.class),anyDouble());
 
+        //MOCK CON EXCEPCIONES ,MODO 1 Y PARÁMETROS EXACTOS
+        doThrow(new IllegalArgumentException("Max 3 guest")).when(this.paymentServiceMock).pay(eq(DataDummy.DEFAULT_BOOKING_REQ_4),eq(320.0));
+
         //MOCK CON EXCEPCIONES ,MODO 2 - PARCIALMENTE MOCK
-        when(this.paymentServiceMock.pay(any(BookingDto.class),anyDouble())).thenThrow(new IllegalArgumentException("Max 3 guest"));
+        //when(this.paymentServiceMock.pay(any(BookingDto.class),anyDouble())).thenThrow(new IllegalArgumentException("Max 3 guest"));
 
         //Guardamos la excepción
         Executable executable =()-> this.bookingService.booking(DataDummy.DEFAULT_BOOKING_REQ_4);
