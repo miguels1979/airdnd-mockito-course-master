@@ -86,8 +86,11 @@ public class BookingServiceTest {
         //NO SE LLAMA AL MÉTODO REAL
         doReturn(DataDummy.DEFAULT_ROOMS_LIST.get(0)).when(this.roomServiceMock).findAvailableRoom(DataDummy.DEFAULT_BOOKING_REQ_4);
 
-        //MOCK CON EXCEPCIONES
-        doThrow(new IllegalArgumentException("Max 3 guest")).when(this.paymentServiceMock).pay(any(BookingDto.class),anyDouble());
+        //MOCK CON EXCEPCIONES ,MODO 1 - TOTALMENTE MOCK
+        //doThrow(new IllegalArgumentException("Max 3 guest")).when(this.paymentServiceMock).pay(any(BookingDto.class),anyDouble());
+
+        //MOCK CON EXCEPCIONES ,MODO 2 - PARCIALMENTE MOCK
+        when(this.paymentServiceMock.pay(any(BookingDto.class),anyDouble())).thenThrow(new IllegalArgumentException("Max 3 guest"));
 
         //Guardamos la excepción
         Executable executable =()-> this.bookingService.booking(DataDummy.DEFAULT_BOOKING_REQ_4);
