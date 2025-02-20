@@ -54,7 +54,7 @@ public class BookingServiceTest {
         doReturn(DataDummy.DEFAULT_ROOMS_LIST.get(0)).when(this.roomServiceMock).findAvailableRoom(DataDummy.DEFAULT_BOOKING_REQ_2);
 
         //SI SE LLAMA AL MÉTODO REAL, PODRÍA LANZAR UNA EXCEPCIÓN SI EL MÉTODO LA TIENE
-        //Cuando se tiene que SER MUY ESTRICTO con los parámetros se tiene que realizar lo siguiente
+        //Cuando se tiene que SER MUY ESTRICTO con los parámetros se tiene que realizar lo siguiente(evalúa argumentos específicos)
         when(this.bookingRepositoryMock.save(DataDummy.DEFAULT_BOOKING_REQ_2)).thenReturn(expected);
 
         //Cuando NO ES NECESARIO SER MUY ESTRICTO con los parámetros se puede realizar lo siguiente
@@ -63,6 +63,11 @@ public class BookingServiceTest {
 
         String actual = this.bookingService.booking(DataDummy.DEFAULT_BOOKING_REQ_2);
         assertEquals(expected,actual);
+
+        //PARA VERIFICAR QUE UN MÉTODO SE HA LLAMADO CORRECTAMENTE, si no se llaman aparece un error.
+        verify(this.roomServiceMock).findAvailableRoom(any(BookingDto.class));
+        verify(this.bookingRepositoryMock).save(any(BookingDto.class));
+
     }
 
 }
