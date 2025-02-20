@@ -65,7 +65,7 @@ public class BookingServiceTest {
         assertEquals(expected,actual);
 
         //PARA VERIFICAR QUE UN MÉTODO SE HA LLAMADO CORRECTAMENTE, si no se llaman aparece un error.
-        verify(this.roomServiceMock).findAvailableRoom(any(BookingDto.class));
+        verify(this.roomServiceMock,times(1)).findAvailableRoom(any(BookingDto.class));
         verify(this.bookingRepositoryMock).save(any(BookingDto.class));
 
     }
