@@ -90,12 +90,16 @@ public class BookingServiceTest {
         //Mockear un método void y luego hacer un verify
         doNothing().when(this.roomServiceMock).bookRoom(anyString());
 
+        doNothing().when(this.mailHelperMock).sendMail(anyString(),anyString());
+
         String actual = this.bookingService.booking(DataDummy.DEFAULT_BOOKING_REQ_2);
         assertEquals(expected,actual);
 
         //PARA VERIFICAR QUE UN MÉTODO SE HA LLAMADO CORRECTAMENTE, si no se llaman aparece un error.
         verify(this.roomServiceMock,times(1)).findAvailableRoom(any(BookingDto.class));
         verify(this.bookingRepositoryMock).save(any(BookingDto.class));
+        verify(this.mailHelperMock,times(1)).sendMail(anyString(),anyString());
+
 
         //SE VERIFICA EL MÉTODO MOCK VOID
         verify(this.roomServiceMock,times(1)).bookRoom(anyString());
