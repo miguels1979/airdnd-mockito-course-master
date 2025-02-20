@@ -8,6 +8,7 @@ import com.kosmostecnologia.airdnd.utils.DataDummy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -44,8 +45,8 @@ public class BookingServiceTest {
     }
 
     @Test
-    @DisplayName("booking should works")
-    void booking(){
+    @DisplayName("booking without exceptions")
+    void bookingWithoutException(){
         final String expected = UUID.randomUUID().toString();
 
         //when(this.roomServiceMock.findAvailableRoom(DataDummy.DEFAULT_BOOKING_REQ_2)).thenReturn(DataDummy.DEFAULT_ROOMS_LIST.get(0));
@@ -73,6 +74,26 @@ public class BookingServiceTest {
 
         //SE VERIFICA EL MÉTODO MOCK VOID
         verify(this.roomServiceMock,times(1)).bookRoom(anyString());
+
+    }
+
+
+    @Test
+    @DisplayName("booking with exceptions")
+    void bookingWithException(){
+        final String expected = UUID.randomUUID().toString();
+        //when(this.roomServiceMock.findAvailableRoom(DataDummy.DEFAULT_BOOKING_REQ_2)).thenReturn(DataDummy.DEFAULT_ROOMS_LIST.get(0));
+        //NO SE LLAMA AL MÉTODO REAL
+        doReturn(DataDummy.DEFAULT_ROOMS_LIST.get(0)).when(this.roomServiceMock).findAvailableRoom(DataDummy.DEFAULT_BOOKING_REQ_4);
+
+        //MOCK CON EXCEPCIONES
+        doThrow(new IllegalArgumentException("Max 3 guest")).when(this.paymentServiceMock).pay(any(BookingDto.class),anyDouble());
+
+        //Guardamos la excepción
+        Executable executable =()-> this.bookingService.booking(DataDummy.DEFAULT_BOOKING_REQ_4);
+
+        //Usamos el assertTrows()
+        assertThrows(IllegalArgumentException.class,executable);
 
     }
 
