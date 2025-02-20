@@ -2,6 +2,7 @@ package com.kosmostecnologia.airdnd.services;
 
 
 import com.kosmostecnologia.airdnd.dto.BookingDto;
+import com.kosmostecnologia.airdnd.dto.RoomDto;
 import com.kosmostecnologia.airdnd.helpers.MailHelper;
 import com.kosmostecnologia.airdnd.repositories.BookingRepository;
 import com.kosmostecnologia.airdnd.utils.CurrencyConverter;
@@ -18,6 +19,8 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.*;
 
 
@@ -135,6 +138,7 @@ public class BookingServiceTest {
     @Test
     @DisplayName("unbook should works")
     void unbook(){
+        //given
         String id1 = "id1";
         String id2 = "id2";
 
@@ -144,6 +148,7 @@ public class BookingServiceTest {
         BookingDto bookingRes2 = DataDummy.DEFAULT_BOOKING_REQ_2;
         bookingRes2.setRoom(DataDummy.DEFAULT_ROOMS_LIST.get(4));
 
+        //when -cuando mande llamar al metodo tal-
         when(this.bookingRepositoryMock.findById(anyString()))
                 .thenReturn(bookingRes1)
                 .thenReturn(bookingRes2);
@@ -154,6 +159,8 @@ public class BookingServiceTest {
         this.bookingService.unbook(id1);
         this.bookingService.unbook(id2);
 
+
+        //then -entonces verifico, ¿que esperamos?
         verify(this.roomServiceMock,times(2)).unbookRoom(anyString());
         verify(this.bookingRepositoryMock,times(2)).deleteById(anyString());
 
@@ -180,6 +187,23 @@ public class BookingServiceTest {
         }
         //PRUEBA
 
+    }
+
+    @Test
+    void shouldCountAvailablePlaces(){
+
+        //GIVEN
+        given(this.roomServiceMock.findAllAvailableRooms())
+                .willReturn(Collections.singletonList(new RoomDto("A1",2)));
+
+        int expected = 2;
+
+        //WHEN
+        int actual = this.bookingService.getAvailablePlaceCount();
+
+        //THEN
+        then(roomServiceMock).should(times(1)).findAllAvailableRooms();//similar al verify
+        assertEquals(expected,actual);
     }
 
 }
