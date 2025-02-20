@@ -4,6 +4,7 @@ package com.kosmostecnologia.airdnd.services;
 import com.kosmostecnologia.airdnd.dto.BookingDto;
 import com.kosmostecnologia.airdnd.helpers.MailHelper;
 import com.kosmostecnologia.airdnd.repositories.BookingRepository;
+import com.kosmostecnologia.airdnd.utils.CurrencyConverter;
 import com.kosmostecnologia.airdnd.utils.DataDummy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -153,9 +154,26 @@ public class BookingServiceTest {
         verify(this.bookingRepositoryMock,times(2)).deleteById(anyString());
 
         //Le agrega mas granuralidad a los test y permite usar los asserEquals a un método void
+        /*
+        ArgumentCaptor es útil para verificar valores pasados a mocks cuando no podemos
+         o no queremos usar verify(mock).method(valorExacto) directamente.
+        */
         verify(this.bookingRepositoryMock,times(2)).findById(this.stringCaptor.capture());
 
         assertEquals(List.of(id1,id2),this.stringCaptor.getAllValues());
+
+    }
+
+    @Test
+    @DisplayName("currencyConverter should works")
+    void currencyConverter(){
+        //Un método estático siempre se debe mockear con un try resource
+        try(MockedStatic<CurrencyConverter>mockedStatic = mockStatic(CurrencyConverter.class)){
+            Double expected = 900.0;
+            mockedStatic.when(()-> CurrencyConverter.toMx(anyDouble())).thenReturn(expected);
+            Double actual = this.bookingService.calculateInMxn(DataDummy.DEFAULT_BOOKING_REQ_1);
+            assertEquals(expected,actual);
+        }
 
     }
 
