@@ -11,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.UUID;
@@ -26,7 +27,7 @@ public class BookingServiceTest {
     private PaymentService paymentServiceMock;
     @Mock
     private RoomService roomServiceMock;
-    @Mock
+    @Spy //El SPY ES UN MOCK QUE SI NO SE LE INDICA EL COMPORTAMIENTO MANDA LLAMAR AL MÉTODO REAL
     private BookingRepository bookingRepositoryMock;
     @Mock
     private MailHelper mailHelperMock;
