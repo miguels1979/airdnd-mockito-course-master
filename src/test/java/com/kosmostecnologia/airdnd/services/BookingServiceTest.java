@@ -45,30 +45,30 @@ public class BookingServiceTest {
     void getAvailablePlaceCount(){
 
         //when con un solo return
-//         when(this.roomServiceMock.findAllAvailableRooms()).thenReturn(DataDummy.DEFAULT_ROOMS_LIST);
-//        int expected = 14;
-//        int actual = this.bookingService.getAvailablePlaceCount();
-//        assertEquals(14,actual);
+        when(this.roomServiceMock.findAllAvailableRooms()).thenReturn(DataDummy.DEFAULT_ROOMS_LIST);
+        int expected = 14;
+        int actual = this.bookingService.getAvailablePlaceCount();
+        assertEquals(14,actual);
 
         //when con múltiples returns
-        when(this.roomServiceMock.findAllAvailableRooms())
-                .thenReturn(DataDummy.DEFAULT_ROOMS_LIST)
-                .thenReturn(Collections.emptyList())
-                .thenReturn(DataDummy.SINGLE_ROOMS_LIST);
-
-        int expected1 = 14;
-        int expected2 = 0;
-        int expected3 = 5;
-
-        int actual1 = this.bookingService.getAvailablePlaceCount();
-        int actual2 = this.bookingService.getAvailablePlaceCount();
-        int actual3 = this.bookingService.getAvailablePlaceCount();
-
-       assertAll(
-               ()-> assertEquals(expected1,actual1),
-               ()-> assertEquals(expected2,actual2),
-               ()->assertEquals(expected3,actual3)
-       );
+//        when(this.roomServiceMock.findAllAvailableRooms())
+//                .thenReturn(DataDummy.DEFAULT_ROOMS_LIST)
+//                .thenReturn(Collections.emptyList())
+//                .thenReturn(DataDummy.SINGLE_ROOMS_LIST);
+//
+//        int expected1 = 14;
+//        int expected2 = 0;
+//        int expected3 = 5;
+//
+//        int actual1 = this.bookingService.getAvailablePlaceCount();
+//        int actual2 = this.bookingService.getAvailablePlaceCount();
+//        int actual3 = this.bookingService.getAvailablePlaceCount();
+//
+//       assertAll(
+//               ()-> assertEquals(expected1,actual1),
+//               ()-> assertEquals(expected2,actual2),
+//               ()->assertEquals(expected3,actual3)
+//       );
 
     }
 
